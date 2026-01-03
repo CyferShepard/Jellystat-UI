@@ -1,4 +1,4 @@
-name: Build and Package Vite Production
+name: Build and Package Jellystat-UI Production
 
 on:
   push:
@@ -21,11 +21,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Vite project
+      - name: Build Jellystat-UI project
         run: npm run build
 
-      - name: Archive production build
+      - name: Archive Jellystat-UI build
         uses: actions/upload-artifact@v4
         with:
-          name: vite-production-build
+          name: jellystat-ui-build
           path: build/
