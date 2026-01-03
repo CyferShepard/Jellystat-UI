@@ -2,7 +2,8 @@
 
 **Jellystat-UI** is the Web UI for Jellystat
 
-`Notice`
+## `Notice`
+
 Jellystat is splitting from a mono repo to allow for more flexibility in devlopment between the UI and API. The UI repo can be found here. [Jellystat UI repo](https://github.com/CyferShepard/Jellystat-UI)
 
 ## Getting Started with Development
