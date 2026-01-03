@@ -1,7 +1,9 @@
 <p align="center">
 
-**Jellystat** is a free and open source Statistics App for Jellyfin!
-This Repo contains the Web UI for Jellystat
+**Jellystat-UI** is the Web UI for Jellystat
+
+`Notice`
+Jellystat is splitting from a mono repo to allow for more flexibility in devlopment between the UI and API. The UI repo can be found here. [Jellystat UI repo](https://github.com/CyferShepard/Jellystat-UI)
 
 ## Getting Started with Development
 
@@ -11,6 +13,8 @@ This Repo contains the Web UI for Jellystat
 - Run `npm run build` to build local files in production
 - Run `npm run dev` to run the client as developer
 - if you require `env.js` this file is built by Jellystat API to pass-through docker variables to the frontend
+
+For API Development, checkout the [Jellystat repo](https://github.com/CyferShepard/Jellystat)
 
 When contributing please ensure to log a pull request on the `unstable` branch
 
