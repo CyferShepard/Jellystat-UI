@@ -51,7 +51,7 @@ jobs:
         if: steps.check_tag.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.sha }}
+          tag_name: build-${{ github.sha }}
           name: Automated Build ${{ github.sha }}
           draft: false
           prerelease: false
@@ -62,7 +62,7 @@ jobs:
         if: steps.check_tag.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.sha }}
+          tag_name: build-${{ github.sha }}
           files: dist/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
