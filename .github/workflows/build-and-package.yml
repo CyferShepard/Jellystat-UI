@@ -47,22 +47,21 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create Release
+      - name: Set short SHA
+        id: vars
+        run: echo "short_sha=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Zip build output
+        run: zip -r jellystat-ui-build.zip dist
+
+      - name: Create Release and Upload Build
         if: steps.check_tag.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.sha }}
-          name: Automated Build ${{ github.sha }}
+          name: Automated Build build-${{ steps.vars.outputs.short_sha }}
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload build to release
-        if: steps.check_tag.outputs.exists == 'false'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: build-${{ github.sha }}
-          files: dist/**/*
+          files: jellystat-ui-build-${{ steps.vars.outputs.short_sha }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
