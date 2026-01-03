@@ -1,10 +1,10 @@
-name: Build and Package Jellystat-UI Production
+name: Build Jellystat-UI Unstable
 
 on:
   push:
-    branches: [main]
+    branches: [unstable]
   pull_request:
-    branches: [main]
+    branches: [unstable]
 
 jobs:
   build:
@@ -35,13 +35,13 @@ jobs:
       - name: Archive Jellystat-UI build
         uses: actions/upload-artifact@v4
         with:
-          name: jellystat-ui-build
+          name: jellystat-ui-unstable-build
           path: dist/**/*
 
       - name: Check if tag exists
         id: check_tag
         run: |
-          if git rev-parse build-${{ github.sha }} >/dev/null 2>&1; then
+          if git rev-parse unstable-build-${{ github.sha }} >/dev/null 2>&1; then
             echo "exists=true" >> $GITHUB_OUTPUT
           else
             echo "exists=false" >> $GITHUB_OUTPUT
@@ -52,16 +52,16 @@ jobs:
         run: echo "short_sha=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
 
       - name: Zip build output
-        run: cd dist && zip -r ../jellystat-ui-build-${{ steps.vars.outputs.short_sha }}.zip .
+        run: cd dist && zip -r ../jellystat-ui-unstable-build-${{ steps.vars.outputs.short_sha }}.zip .
 
       - name: Create Release and Upload Build
         if: steps.check_tag.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: build-${{ github.sha }}
+          tag_name: unstable-build-${{ github.sha }}
           name: Jellystat-UI Build ${{ steps.vars.outputs.short_sha }}
           draft: false
-          prerelease: false
-          files: jellystat-ui-build-${{ steps.vars.outputs.short_sha }}.zip
+          prerelease: true
+          files: jellystat-ui-unstable-build-${{ steps.vars.outputs.short_sha }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
